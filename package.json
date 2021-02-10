@@ -1,7 +1,22 @@
 {
   "scripts": {
     "start": "babel-node build/server.js",
-    "dev": "nodemon --exec babel-node src/server.js"
+    "dev": "nodemon --exec babel-node src/server.js",
+    "build": "yarn clean && yarn db:reload && babel -d ./build ./src --ignore '**/*.spec.js'",
+    "clean": "rm -rf build && mkdir build",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint --fix --ext .js .",
+    "format": "prettier --write src/*.(js)",
+    "precommit": "lint-staged",
+    "migrate": "yarn sequelize db:migrate",
+    "migrate:undo": "yarn sequelize db:migrate:undo:all",
+    "migrate:undo:prev": "yarn sequelize db:migrate:undo",
+    "gen:seed": "yarn sequelize seed:generate",
+    "seed": "yarn sequelize db:seed:all",
+    "seed:undo": "yarn sequelize db:seed:undo:all",
+    "reseed:db": "yarn sequelize db:seed:undo && yarn sequelize db:seed:all",
+    "generate:model": "yarn sequelize model:generate",
+    "db:reload": "yarn sequelize db:seed:undo && sequelize db:migrate:undo:all && yarn sequelize db:migrate && yarn sequelize db:seed:all"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -24,7 +39,7 @@
   },
   "name": "volunteerspark",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "repository": "https://github.com/obayomi96/volunteerspark.git",
   "author": "Martins Obayomi <obayomimartins96@gmail.com>",
   "license": "MIT",
@@ -33,6 +48,7 @@
     "@babel/cli": "^7.12.13",
     "@babel/core": "^7.12.13",
     "@babel/node": "^7.12.13",
+    "@babel/preset-env": "^7.11.0",
     "babel-loader": "^8.2.2",
     "@babel/register": "^7.12.13",
     "@babel/runtime": "^7.12.13",
