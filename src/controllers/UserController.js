@@ -2,7 +2,7 @@
 import sequelize from 'sequelize';
 import models from '../db/models';
 import utils from '../utils/response';
-import auth from '../utils/auth';
+import auth from '../src/utils/auth';
 
 const { Op } = sequelize;
 

@@ -1,5 +1,3 @@
-import HttpError from './httpErrors';
-
 /**
  * @class Response
  * @description Contains http Response methods
