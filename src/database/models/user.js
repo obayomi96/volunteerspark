@@ -45,17 +45,9 @@ export default (sequelize, DataTypes) => {
       ),
       organizationName: DataTypes.STRING,
       project: DataTypes.STRING,
-      impactAreasOfInterest: DataTypes.STRING,
-      sdgs: DataTypes.STRING,
-      skills: DataTypes.ENUM(
-        'engineering',
-        'information-technology',
-        'social-development',
-        'music',
-        'finance',
-        'economics',
-        'people'
-      ),
+      areaOfInterestId: DataTypes.INTEGER,
+      sdgId: DataTypes.INTEGER,
+      skillId: DataTypes.INTEGER,
       descriptionOfResponsibilities: DataTypes.STRING,
       currentPosition: DataTypes.STRING,
       startDate: DataTypes.STRING,
@@ -69,11 +61,12 @@ export default (sequelize, DataTypes) => {
     {},
   );
   
-  // User.associate = ({ Role, Errand, Notification }) => {
-  //   User.belongsTo(Role, { as: 'role', foreignKey: 'roleId' });
-  //   User.hasMany(Errand, { as: 'errand', foreignKey: 'userId' });
-  //   User.hasMany(Notification, { as: 'notifications', foreignKey: 'userId' });
-  // };
+  User.associate = ({ Role, Errand, Notification }) => {
+    // User.belongsTo(Role, { as: 'role', foreignKey: 'roleId' });
+    User.hasMany(sdgs, { as: 'sdgs', foreignKey: 'sdgId' });
+    User.hasMany(skills, { as: 'skills', foreignKey: 'skillId' });
+    User.hasMany(areaOfInterests, { as: 'areaOfInterests', foreignKey: 'areaOfInterestId' });
+  };
 
   User.beforeCreate(async (user) => {
     const hashedPassword = bcrypt.hashSync(user.password, 10);
