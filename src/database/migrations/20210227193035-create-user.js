@@ -115,24 +115,16 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      impactAreasOfInterest: {
-        type: Sequelize.STRING,
+      areasOfInterestId: {
+        type: Sequelize.INTEGER,
         allowNull: true,
       },
-      sdgs: {
-        type: Sequelize.STRING,
+      sdgId: {
+        type: Sequelize.INTEGER,
         allowNull: true,
       },
-      skills: {
-        type: Sequelize.ENUM(
-          'engineering',
-          'information-technology',
-          'social-development',
-          'music',
-          'finance',
-          'economics',
-          'people'
-        ),
+      skillId: {
+        type: Sequelize.INTEGER,
         allowNull: true,
       },
       descriptionOfResponsibilities: {
