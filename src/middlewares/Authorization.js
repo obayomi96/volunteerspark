@@ -24,6 +24,7 @@ class Authorization {
       throw unAuthorized('Invalid or expired token');
     }
   }
+
   /**
    * @method verifyAdmin
    * @description verifies the admin user token

@@ -2,7 +2,8 @@
   "scripts": {
     "start": "babel-node build/server.js",
     "dev": "nodemon --exec babel-node src/server.js",
-    "build": "yarn clean && yarn migrate && yarn seed && babel -d ./build ./src --ignore '**/*.spec.js'",
+    "build": "yarn clean && babel -d ./build ./src --ignore '**/*.spec.js'",
+    "db:build": "yarn clean && yarn migrate && yarn seed && babel -d ./build ./src --ignore '**/*.spec.js'",
     "clean": "rm -rf build && mkdir build",
     "lint": "eslint src/**/*.js",
     "lint:fix": "eslint --fix --ext .js .",
