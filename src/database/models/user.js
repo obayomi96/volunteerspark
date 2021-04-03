@@ -31,10 +31,7 @@ export default (sequelize, DataTypes) => {
         'masters',
         'phd',
       ),
-      availabilityType: DataTypes.ENUM(
-        'full-time',
-        'part-time'
-      ),
+      availabilityType: DataTypes.ENUM('full-time', 'part-time'),
       availabilityHoursOrWeeks: DataTypes.INTEGER,
       availabilityDays: DataTypes.ENUM(
         'monday',
@@ -60,12 +57,15 @@ export default (sequelize, DataTypes) => {
     },
     {},
   );
-  
+
   User.associate = ({ Role, Errand, Notification }) => {
     // User.belongsTo(Role, { as: 'role', foreignKey: 'roleId' });
     User.hasMany(sdgs, { as: 'sdgs', foreignKey: 'sdgId' });
     User.hasMany(skills, { as: 'skills', foreignKey: 'skillId' });
-    User.hasMany(areaOfInterests, { as: 'areaOfInterests', foreignKey: 'areaOfInterestId' });
+    User.hasMany(areaOfInterests, {
+      as: 'areaOfInterests',
+      foreignKey: 'areaOfInterestId',
+    });
   };
 
   User.beforeCreate(async (user) => {

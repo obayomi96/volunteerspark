@@ -37,7 +37,7 @@ class Authorization {
     try {
       req.user = AuthService.validateToken(req.headers);
       if (req.user.role !== 'super_admin') {
-        throw unAuthorized('Unauthorized user, contact Admin!')
+        throw unAuthorized('Unauthorized user, contact Admin!');
       } else {
         return next();
       }

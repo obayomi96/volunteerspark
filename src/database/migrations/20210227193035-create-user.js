@@ -6,7 +6,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       role: {
         type: Sequelize.STRING,
@@ -73,7 +73,7 @@ module.exports = {
         allowNull: false,
       },
       type: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       highestLevelOfEducation: {
         type: Sequelize.ENUM(
@@ -87,10 +87,7 @@ module.exports = {
         allowNull: false,
       },
       availabilityType: {
-        type: Sequelize.ENUM(
-          'full-time',
-          'part-time'
-        ),
+        type: Sequelize.ENUM('full-time', 'part-time'),
         allowNull: true,
       },
       availabilityHoursOrWeeks: {
@@ -165,15 +162,15 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Users');
-  }
+  },
 };

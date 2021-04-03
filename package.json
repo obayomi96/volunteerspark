@@ -2,7 +2,7 @@
   "scripts": {
     "start": "babel-node build/server.js",
     "dev": "nodemon --exec babel-node src/server.js",
-    "build": "yarn clean && babel -d ./build ./src --ignore '**/*.spec.js'",
+    "build": "yarn clean && yarn migrate && yarn seed && babel -d ./build ./src --ignore '**/*.spec.js'",
     "db:build": "yarn clean && yarn migrate && yarn seed && babel -d ./build ./src --ignore '**/*.spec.js'",
     "clean": "rm -rf build && mkdir build",
     "lint": "eslint src/**/*.js",
@@ -15,7 +15,8 @@
     "seed:undo": "yarn sequelize db:seed:undo:all",
     "reseed:db": "yarn sequelize db:seed:undo && yarn sequelize db:seed:all",
     "generate:model": "yarn sequelize model:generate",
-    "db:reload": "yarn sequelize db:seed:undo && sequelize db:migrate:undo:all && yarn sequelize db:migrate && yarn sequelize db:seed:all"
+    "db:reload": "yarn sequelize db:seed:undo && sequelize db:migrate:undo:all && yarn sequelize db:migrate && yarn sequelize db:seed:all",
+    "prettier": "prettier --write '**/*.{js,jsx}'"
   },
   "engines": {
     "node": ">=12.1.0"

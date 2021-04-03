@@ -63,7 +63,7 @@ class AuthService {
       'The phonenumber or password provided does not match our records. Please confirm and try again',
     );
   }
-    /**
+  /**
    * @method validateToken
    * @description Ensures a valid token is provided
    * @param {object} headers - The headers Object containing (hopefully) the token to validate
@@ -71,7 +71,8 @@ class AuthService {
    */
   static validateToken(headers) {
     const { authorization } = headers;
-    if (!authorization) return unAuthorized('Authentication header not provided');
+    if (!authorization)
+      return unAuthorized('Authentication header not provided');
     const splitToken = authorization.split(' ');
     if (splitToken.length !== 2) return unAuthorized('Malformed JWToken');
 

@@ -1,14 +1,11 @@
 import express from 'express';
 import UserController from '../controllers/UserController';
 
-const {
-  signUp,
-  login,
-} = UserController;
+const { VolunteerLogin, VolunteerSignup } = UserController;
 
 const userRoute = express();
 
-userRoute.post('/register', signUp);
-userRoute.post('/login', login);
+userRoute.post('/signup', VolunteerSignup);
+userRoute.post('/login', VolunteerLogin);
 
 export default userRoute;
