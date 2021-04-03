@@ -35,7 +35,7 @@ app.use('*', (req, res) =>
   res.status(404).json({
     status: res.statusCode,
     error: 'Resource not found. Double check the url and try again',
-  })
+  }),
 );
 
 app.use((err, req, res, next) => {

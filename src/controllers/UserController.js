@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import sequelize from 'sequelize';
-import models from '../db/models';
+import models from '../database/models';
 import utils from '../utils/response';
 import auth from '../src/utils/auth';
 
@@ -19,8 +19,8 @@ class UserController {
    * @returns {Object} object containing user data and access Token
    * @memberof UserController
    */
-  static async signUp(req, res) {
-    const { name, email, password } = req.body.user;
+  static async VolunteerSignup(req, res) {
+    const { email, password,  } = req.body;
     const existingUser = await models.User.findOne({
       where: {
         [Op.or]: [{ email }],
@@ -29,13 +29,12 @@ class UserController {
     if (existingUser) {
       return utils.errorStat(res, 409, 'User Already Exists');
     }
-    const newUser = { ...req.body.user, password: auth.hashPassword(password) };
+    const newUser = { ...req.body, password: auth.hashPassword(password) };
     const user = await models.User.create(newUser);
-    const token = auth.generateToken({ id: user.id, name, email });
+    const token = auth.generateToken({ id: user.id, email });
     return utils.successStat(res, 201, 'user', {
       id: user.id,
       token,
-      name,
       email,
     });
   }
@@ -48,15 +47,15 @@ class UserController {
    * @returns {Object} object containing user data and access Token
    * @memberof UserController
    */
-  static async login(req, res) {
-    const { email, password } = req.body.user;
+  static async VolunteerLogin(req, res) {
+    const { email, password } = req.body;
     const user = await models.User.findOne({ where: { email } });
 
     if (!user)
       return utils.errorStat(
         res,
         401,
-        'User not found, check your login details'
+        'User not found, check your login details',
       );
     const matchPasswords = auth.comparePassword(password, user.password);
     if (!matchPasswords) {
@@ -66,10 +65,8 @@ class UserController {
       id: user.id,
       token: await auth.generateToken({
         id: user.id,
-        name: user.name,
         email: user.email,
       }),
-      name: user.name,
       email: user.email,
     });
   }

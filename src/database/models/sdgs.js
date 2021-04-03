@@ -3,9 +3,9 @@ module.exports = (sequelize, DataTypes) => {
     'Sdgs',
     {
       name: DataTypes.STRING,
-      description: DataTypes.STRING
+      description: DataTypes.STRING,
     },
-    {}
+    {},
   );
   Sdgs.associate = (models) => {
     // associations can be defined here
